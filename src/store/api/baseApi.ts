@@ -8,7 +8,7 @@ export const baseApi = createApi({
   }),
   reducerPath: "baseApi",
   // Tag types are used for caching and invalidation.
-  tagTypes: ["Polls", " Comment"],
+  tagTypes: ["Polls", "Comment"],
   endpoints: () => ({}),
 });
 

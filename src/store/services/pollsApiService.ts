@@ -1,5 +1,14 @@
 import baseApi from "@store/api/baseApi";
 
+export interface IPayload {
+  experationDate: Date;
+  question: string;
+  options: {
+    name: string;
+    votes: number;
+  }[];
+}
+
 const pollsApiService = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getPolls: builder.query({
@@ -11,7 +20,7 @@ const pollsApiService = baseApi.injectEndpoints({
       providesTags: ["Polls"],
     }),
     createPoll: builder.mutation({
-      query: (data: { title: string; options: string[] }) => ({
+      query: (data: IPayload) => ({
         url: `/polls`,
         method: "POST",
         body: data,
@@ -19,9 +28,9 @@ const pollsApiService = baseApi.injectEndpoints({
       invalidatesTags: ["Polls"],
     }),
     vote: builder.mutation({
-      query: (data: { pollId: string; payload: any }) => ({
-        url: `/polls/${data.pollId}/vote`,
-        method: "POST",
+      query: (data: { pollId: string; payload: IPayload }) => ({
+        url: `/polls/${data.pollId}`,
+        method: "PATCH",
         body: data.payload,
       }),
       invalidatesTags: ["Polls"],
