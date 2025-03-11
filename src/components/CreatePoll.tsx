@@ -4,6 +4,7 @@ function CreatePoll() {
   const [question, setQuestion] = useState("");
   const [options, setOptions] = useState(["", ""]);
   const [duration, setDuration] = useState(1);
+  const [loading, setLoading] = useState(false);
 
   const handleOptionChange = (index: number, value: string) => {
     const newOptions = [...options];
@@ -58,6 +59,9 @@ function CreatePoll() {
           </option>
         ))}
       </select>
+      <button className="w-full p-2 mt-4 border rounded-md bg-blue-500 text-white hover:bg-blue-600">
+        Create Poll
+      </button>
     </div>
   );
 }
